@@ -1,5 +1,23 @@
 #include "get_next_line.h"
 
+char	*ft_strchr(const char *s, int c)
+{
+	char	*str;
+
+	str = (char *)s;
+	if (!str)
+		return (NULL);
+	while (*str != c)
+	{
+		if (*str == '\0')
+		{
+			return (NULL);
+		}
+		str++;
+	}
+	return (str);
+}
+
 char	*fix_remainder(char *str)
 {
 	char	*rtn;
@@ -52,7 +70,8 @@ static int	read_and_join(int fd, char **remainder, char *buf)
 	int	bytes_read;
 	
 	bytes_read = 1;
-	while (!has_new_line(*remainder) && bytes_read > 0)
+	while (NULL == ft_strchr(*remainder, '\n') && bytes_read > 0)
+	//while (!has_new_line(*remainder) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
