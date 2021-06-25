@@ -1,28 +1,10 @@
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
-{
-	char	*str;
-
-	str = (char *)s;
-	if (!str)
-		return (NULL);
-	while (*str != c)
-	{
-		if (*str == '\0')
-		{
-			return (NULL);
-		}
-		str++;
-	}
-	return (str);
-}
-
 char	*fix_remainder(char *str)
 {
 	char	*rtn;
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 
 	len = 0;
 	i = 0;
@@ -47,7 +29,7 @@ char	*fix_remainder(char *str)
 
 static char	*get_new_line(char *str)
 {
-	int	len;
+	int		len;
 	char	*new_line;
 
 	len = 0;
@@ -60,7 +42,7 @@ static char	*get_new_line(char *str)
 		return (NULL);
 	len = -1;
 	while (str[++len] && str[len] != '\n')
-	       new_line[len] = str[len];
+		new_line[len] = str[len];
 	new_line[len] = '\0';
 	return (new_line);
 }	
@@ -68,10 +50,9 @@ static char	*get_new_line(char *str)
 static int	read_and_join(int fd, char **remainder, char *buf)
 {
 	int	bytes_read;
-	
+
 	bytes_read = 1;
 	while (NULL == ft_strchr(*remainder, '\n') && bytes_read > 0)
-	//while (!has_new_line(*remainder) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -86,7 +67,7 @@ int	get_next_line(int fd, char **line)
 {
 	static char	*remainder;
 	char		*buf;
-	int		bytes_read;
+	int			bytes_read;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (GNL_ERROR);

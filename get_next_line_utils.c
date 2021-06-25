@@ -3,7 +3,7 @@
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	if (!str)
 		return (0);
@@ -32,20 +32,22 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 	return (dest);
 }
 
-int	has_new_line(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-	
-	i = 0;
+	char	*str;
+
+	str = (char *)s;
 	if (!str)
-		return(0);
-	while (str[i])
+		return (NULL);
+	while (*str != c)
 	{
-		if ((str[i]) == '\n')
-			return (1);
-		i++;
+		if (*str == '\0')
+		{
+			return (NULL);
+		}
+		str++;
 	}
-	return (0);
+	return (str);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -61,7 +63,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	joined = malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!joined)
 		return (0);
-	ft_memmove(joined, s1, 	s1_len);
+	ft_memmove(joined, s1, s1_len);
 	ft_memmove(joined + s1_len, s2, s2_len);
 	joined[s1_len + s2_len] = '\0';
 	free((char *)s1);
